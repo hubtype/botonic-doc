@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "dev": "docz dev --ts",
+    "build": "docz build --ts"
+  },
+  "devDependencies": {
+    "docz": "^0.3.4",
+    "typescript": "^2.8.3"
+  }
+}
