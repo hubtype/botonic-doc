@@ -178,42 +178,24 @@ Finally, just crete a couple of actions that respond to these intents:
 **pages/actions/age.js**
 
 ```javascript
-import React from 'react'
-import { Botonic } from 'botonic'
-
-export default class extends Botonic.React.Component {
-
-  render() {
-    return (
-        <message type="text">
-            I'm older than the universe itself
-        </message>
-    )
-  }
-}
+export default () =>
+    <message type="text">
+        I'm older than the universe itself
+    </message>
 ```
 
 **pages/actions/smalltalk.js**
 
 ```javascript
-import React from 'react'
-import { Botonic } from 'botonic'
-
-export default class extends Botonic.React.Component {
-
-  render() {
-    return (
-        <messages>
-            <message type="text">
-                I'm not interested in talking about that...
-            </message>
-            <message type="image">
-                https://i.pinimg.com/originals/eb/4d/d1/eb4dd12ae0b4a57a3fbb85e61d0c1cf4.gif
-            </message>
-        </messages>
-    )
-  }
-}
+export default () =>
+    <messages>
+        <message type="text">
+            I'm not interested in talking about that...
+        </message>
+        <message type="image">
+            https://i.pinimg.com/originals/eb/4d/d1/eb4dd12ae0b4a57a3fbb85e61d0c1cf4.gif
+        </message>
+    </messages>
 ```
 
 That's it! You can run `botonic run` and play a little bit. Try adding more routes/actions for different Dialogflow intents. When you're ready, go to the next section to learn how to put your bot in production and publish it to messaging platforms like Facebook Messenger.
