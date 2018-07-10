@@ -1,0 +1,47 @@
+---
+name: 2. Handover Bot
+route: /tutorials-and-examples/handover-bot
+menu: 4. Tutorials & Examples
+---
+
+# Handover Bot
+
+This template shows a very simple case of use where a user is transferred to a `human agent` through the chatbot.
+
+In order to `handoff` a chatbot conversation to a `human agent`, the chatbot must have the option of transferring the cases and that there is needing an available Agent to be able to answer the user.
+
+When developing the chatbot, it is not at all complex to make the call to transfer the case to the agent. In the component of the chatbot where the case is to be transferred, a call must be made to the function `this.humanHandOff(req);`.
+
+
+This function should be called within the `static async botonicInit({req})` where will be called always the chatbot enters the component.
+Here below, we see how there would be an example component where a handoff is made:
+
+
+```
+import React from 'react'
+import { Botonic } from 'botonic'
+
+export default class extends Botonic.React.Component {
+
+  static async botonicInit({ req }) {
+
+   this.humanHandOff(req);
+  
+  }
+
+  render() {
+    return (
+       <messages>
+            <message type="text">
+                Please, wait a second. You are being transferred to an agent.
+            </message>
+        </messages>
+    )
+  }
+}
+
+```
+
+
+
+By the user, he will ask to be transferred to an agent and will not do anything except wait for the agent.

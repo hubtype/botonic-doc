@@ -1,0 +1,34 @@
+---
+name: 5. Intents Bot
+route: /tutorials-and-examples/intents-bot
+menu: 4. Tutorials & Examples
+---
+
+# Intents Bot
+
+This template shows a simple case of use where we use an integration, specifically `Dialogflow` integration.
+
+The integration with `dialogflow` is super easy, we have to enter in `botonic.config.js` and add the `dialogflow api token` to enable the integration.
+
+```
+integrations: {
+    /* Uncomment this to enable NLP with Dialogflow
+    dialogflow: {
+        token: "YOUR_DIALOGFLOW_API_TOKEN"
+    }*/
+}
+
+```
+
+Below integrations you have the routes, where we will add the `dialogflow intents` that we want for our chatbot. The `intents` contain a set of words and / or phrases that when written by the user, the chatbot will search the corresponding `intent` and call the corresponding action. Here we have an example of how to call the `intents`:
+
+```
+routes: [
+    /* Captures different intents (enable the Dialogflow integration,
+    see "integrations" section at the top of this file) */
+    {intent: "smalltalk.greetings.hello", action: "hi"},
+    {intent: "smalltalk.greetings.bye", action: "bye"}
+]
+```
+
+You can have as many `intents` as you want, and each one will call a component of the chatbot.
