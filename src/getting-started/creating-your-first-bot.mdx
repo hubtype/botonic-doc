@@ -198,6 +198,8 @@ export default () =>
     </messages>
 ```
 
+Note that if you just have to return some static messages it's not necessary to create a full `Botonic.React.Component` subclass. It's enough to export a function that returns the messages in RCML.
+
 That's it! You can run `botonic run` and play a little bit. Try adding more routes/actions for different Dialogflow intents. When you're ready, go to the next section to learn how to put your bot in production and publish it to messaging platforms like Facebook Messenger.
 
 <NextButton title="Deploying" href="/getting-started/deploying" />
