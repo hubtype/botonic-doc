@@ -21,11 +21,10 @@ A user input is an object that has some fields:
 
 ```
 {
-    type: "text", // Input type, it can be one of text, postback, image,
-    	 video, audio, document, location
-    data: "Hello!" // Raw text (or attachment URL if it's a media type)
-    payload: "", // This is used when the user has clicked on a button or quick reply
-    intent: "smalltalk.greeting" //Intent ID according to the NLP backend
+    type: "text", 
+    data: "Hello!"
+    payload: "",
+    intent: "smalltalk.greeting"
 }
 ```
 Every route (an entry in this array) is composed by a matching rule and an action.
