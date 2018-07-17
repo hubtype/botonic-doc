@@ -7,8 +7,28 @@ order: -4
 
 # NLU
 
-* integarate Dialogflow (with token in config)
+`Dialogflow` has agents that are best described as `NLU (Natural Language Understanding)` modules. They can be used by your app, product, or service to transform natural user requests into actionable data. This transformation occurs when a user input matches one of the intents inside your agent.
 
-* Add routes that match intents
+To do this, we need to integrate `dialogflow`. Below, we have the steps to follow:
+
+The integration with `dialogflow` is super easy. First of all, we need to go to `http://dialogflow.com` and sign up for free. Afterwards, we have to create a new agent. Once we have the agent created, we can follow the steps in the `dialogflow docs` to obtain our `api token`. Finally, we have to enter in `botonic.config.js` and add the `api token` to enable the integration. Below we see the code:
+
+```
+integrations: {
+    /* Uncomment this to enable NLP with Dialogflow
+    dialogflow: {
+        token: "YOUR_DIALOGFLOW_API_TOKEN"
+    }*/
+}
+```
+`Dialogflow` allows us to create different `intents` and assign key words or phrases. So, when the user writes any of them, matches with the `intent` and redirects to the corresponding route.
+
+Below, we see how to captures different intents (we need the integration with dialogflow enabled, as we have seen above):
+
+```
+{intent: "smalltalk.agent.funny", action: "funny"},
+{intent: "smalltalk.agent.good", action: "funny"},
+{intent: "smalltalk.user.likes_agent", action: "funny"}
+```
 
 * Deal with entities in action (req.input.entities)
