@@ -7,4 +7,133 @@ order: -3
 
 # RCML
 
-Describe all message types with examples
+The RCML is a language that allows you to create intuitive and powerful conversations for your bots with diferent type of messages.
+
+As you may know there are different types of outputs that messaging apps support like quickreplies (https://developers.facebook.com/docs/messenger-platform/send-messages/quick-replies), carrousels (https://developers.facebook.com/docs/messenger-platform/send-messages/template/generic?locale=en_US#carousel), message button (https://core.telegram.org/bots/2-0-intro#callback-buttons), etc.
+
+Below you can see some examples on how to render these components usgin RCML.
+
+### Text
+
+The "Hello World!" output would be defined as below:
+
+```javascript
+<message type="text">
+    Hello World!
+</message>
+```
+//TODO: IMAGE
+
+### Buttons and Quickreplies
+
+Buttons and quickreplies can have an url link, a payload attached, or a href attribute.
+
+```javascript
+<messages>
+	<message type="text">
+        Here I display two types of buttons, the first one is a URL button
+        and the second is a payload button:
+        <button url="https://botonic.io">Visit botonic.io</button>
+        <button payload="carrousel">Show me a carrousel</button>
+    </message>
+    <message type="text">
+        And now, I display two quickreplies with a payload:
+        <reply payload="yes">Cool</reply>
+        <reply payload="no">Nah..</reply>
+    </message>
+</messages>
+```
+//TODO image
+
+### Carrousel
+
+You can render a dynamic and static carrousel following the below structure:
+
+```javascript
+static async botonicInit({ req }) {
+	req.context.movies = [
+	    {name: 'Pulp Fiction', desc: 'Le Big Mac', url: 'https://www.imdb.com/title/tt0110912', pic: 'https://ia.media-imdb.com/images/M/MV5BMTkxMTA5OTAzMl5BMl5BanBnXkFtZTgwNjA5MDc3NjE@._V1_SY1000_CR0,0,673,1000_AL_.jpg'},
+	    {name: 'The Big Lebowski', desc: 'Fuck it Dude', url: 'https://www.imdb.com/title/tt0118715', pic: 'https://www.thelinda.org/wp-content/uploads/2018/02/Big-L-2-1.jpg'},
+	    {name: 'Snatch', desc: 'Five minutes, Turkish', url: 'https://www.imdb.com/title/tt0208092', pic: 'https://nebula.wsimg.com/obj/NzQ3QUYxQzZBNzE4NjNFRTc1MTU6NmM4YjgzZWVlZTE2MGMzM2RkMTdlZjdjNGUyZmFhNDE6Ojo6OjA='},
+	]
+}
+
+render() {
+	return (
+	    <messages>
+	        <message type="text">
+	            This a dynamic Carrousel
+	        </message>
+	        <message type="carrousel">
+	            {this.props.context.movies.map((e, i) => 
+	                <element key={e.name}>
+	                    <image>{e.pic}</image>
+	                    <title>{e.name}</title>
+	                    <desc>{e.desc}</desc>
+	                    <button url={e.url}>Visit website</button>
+	                </element>
+	            )}
+	        </message>
+	        <message type="text">
+	           And this is a static Carrousel
+	        </message>
+	        <message type="carrousel">
+			    <element key="1">
+			        <image>https://botonic.io/images/botonic_react_logo-p-500.png</image>
+			        <title>Title1</title>
+			        <desc>Subtitle1</desc>
+			        <button url="https://botonic.io">Visit botonic.io</button>
+			    </element>
+			    <element key="2">
+			        <image>https://botonic.io/images/botonic_react_logo-p-500.png</image>
+			        <title>Title2</title>
+			        <desc>Subtitle2</desc>
+			        <button url="https://botonic.io">Visit botonic.io</button>
+			    </element>
+			    <element key="3">
+			        <image>https://botonic.io/images/botonic_react_logo-p-500.png</image>
+			        <title>Title3</title>
+			        <desc>Subtitle3</desc>
+			        <button url="https://botonic.io">Visit botonic.io</button>
+			    </element>
+			</message>
+	    </messages>
+	)
+}
+```
+//TODO gif
+
+### Media Files
+
+You can send all this types of media files:
+
+```javascript
+<messages>
+	<message type="image" src="https://botonic.io/images/botonic_react_logo-p-500.png"/>
+	<message type="video" src="https://www.w3schools.com/html/mov_bbb.mp4"/>
+	<message type="audio" src="https://www.w3schools.com/html/horse.mp3"/>
+</messages>
+```
+//TODO image
+
+### Documents 
+
+```javascript
+<messages>
+	<message type="document" src="http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf"/>
+</messages>
+```
+
+//TODO image
+
+### Location
+
+```javascript
+<messages>
+    <message type="location">
+        <lat>41.412255</lat>
+        <long>2.2079313</long>
+    </message>
+</messages>
+```
+//TODO image

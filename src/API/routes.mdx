@@ -19,7 +19,7 @@ A user input is an object that has some fields:
 
 - Intent --> which match Intent ID according to the NLP backend with the integration.
 
-```
+```javascript
 {
     type: "text", 
     data: "Hello!"
@@ -45,42 +45,42 @@ to consider a match.
 In the following example, the first rule matches if and only if we get the text `start` and will execute the
 React component defined in `pages/actions/start.js`
 
-```
+```javascript
 {text: "start", action: "start"}
 ```
 Below, another text rule (perfect match) to trigger the `end` action
-```
+```javascript
 {text: "end", action: "end"}
 ```
 These rules use a case insensitive regexp to match text messages that contain
 a certain text. For the example below, will capture 'BUTTONS', 'Buttons', etc.
 
-```
+```javascript
 {text: /^buttons$/i, action: "buttons"}
 ```
 If you want to use regexp with grouped values, you need to upgrade Node to `v.10`
 or ahead. This regular expression match `age-{NUMBER}` where NUMBER can be any digit.
 Then, in your component `bye`, you can access to this in `req.params`
-```
+```javascript
 {text: /^age-(?<age>\d*)/, action: "age"}
 ```
 Below, few examples of how to capture different payloads
-```
+```javascript
 {payload: "carrousel", action: "carrousel"},
 {payload: /^(yes|no)$/, action: "quickreply_response"}
 ```
 It is posible to use a function test to capture any text that starts with `bye`
-```
+```javascript
 {text: (t) => t.startsWith('bye'), action: "bye"}
 ```
 Below, we see how to captures different intents (enable the Dialogflow integration)
-```
+```javascript
 {intent: "smalltalk.agent.funny", action: "funny"},
 {intent: "smalltalk.agent.good", action: "funny"},
 {intent: "smalltalk.user.likes_agent", action: "funny"}
 ```
 There's an implicit rule that captures any other input and maps it to
 the `404` action, it would be equivalent to:
-```
+```javascript
 {type: /^.*$/, action: "404"}
 ```
