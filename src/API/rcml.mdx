@@ -22,7 +22,6 @@ The "Hello World!" output would be defined as below:
     Hello World!
 </message>
 ```
-//TODO: IMAGE
 
 ### Buttons and Quickreplies
 
@@ -43,7 +42,8 @@ Buttons and quickreplies can have an url link, a payload attached, or a href att
     </message>
 </messages>
 ```
-//TODO image
+*Example of how it looks in the Messenger platform:*
+![](https://ecstatic-lewin-beddb2.netlify.com/images/buttons.png)
 
 ### Carrousel
 
@@ -52,9 +52,12 @@ You can render a dynamic and static carrousel following the below structure:
 ```javascript
 static async botonicInit({ req }) {
 	req.context.movies = [
-	    {name: 'Pulp Fiction', desc: 'Le Big Mac', url: 'https://www.imdb.com/title/tt0110912', pic: 'https://ia.media-imdb.com/images/M/MV5BMTkxMTA5OTAzMl5BMl5BanBnXkFtZTgwNjA5MDc3NjE@._V1_SY1000_CR0,0,673,1000_AL_.jpg'},
-	    {name: 'The Big Lebowski', desc: 'Fuck it Dude', url: 'https://www.imdb.com/title/tt0118715', pic: 'https://www.thelinda.org/wp-content/uploads/2018/02/Big-L-2-1.jpg'},
-	    {name: 'Snatch', desc: 'Five minutes, Turkish', url: 'https://www.imdb.com/title/tt0208092', pic: 'https://nebula.wsimg.com/obj/NzQ3QUYxQzZBNzE4NjNFRTc1MTU6NmM4YjgzZWVlZTE2MGMzM2RkMTdlZjdjNGUyZmFhNDE6Ojo6OjA='},
+	    {name: 'Pulp Fiction', desc: 'Le Big Mac', url: 'https://www.imdb.com/title/tt0110912', 
+	    pic: 'https://images-na.ssl-images-amazon.com/images/I/51Z95XQDHRL._SY445_.jpg'},
+	    {name: 'The Big Lebowski', desc: 'Fuck it Dude', url: 'https://www.imdb.com/title/tt0118715', 
+	    pic: 'https://www.thelinda.org/wp-content/uploads/2018/02/Big-L-2-1.jpg'},
+	    {name: 'Snatch', desc: 'Five minutes, Turkish', url: 'https://www.imdb.com/title/tt0208092', 
+	    pic: 'http://www.libertytuga.pt/wp-content/uploads/2011/11/snatch.jpg'},
 	]
 }
 
@@ -101,7 +104,8 @@ render() {
 	)
 }
 ```
-//TODO gif
+*Example of how it looks in the Messenger app:*
+![](https://ecstatic-lewin-beddb2.netlify.com/images/carrousel.gif)
 
 ### Media Files
 
@@ -114,17 +118,16 @@ You can send all this types of media files:
 	<message type="audio" src="https://www.w3schools.com/html/horse.mp3"/>
 </messages>
 ```
-//TODO image
+*Example of the three types of messages:*
+![](https://ecstatic-lewin-beddb2.netlify.com/images/media_files.png)
 
-### Documents 
+### Document
 
 ```javascript
 <messages>
 	<message type="document" src="http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf"/>
 </messages>
 ```
-
-//TODO image
 
 ### Location
 
@@ -136,4 +139,5 @@ You can send all this types of media files:
     </message>
 </messages>
 ```
-//TODO image
+*Example of the document file and location in Facebook Messenger:*
+![](https://ecstatic-lewin-beddb2.netlify.com/images/doc_location.png)
