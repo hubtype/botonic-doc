@@ -21,7 +21,7 @@ integrations: {
     }*/
 }
 ```
-`Dialogflow` allows us to create different `intents` and assign key words or phrases. So, when the user writes any of them, matches with the `intent` and redirects to the corresponding route.
+`Dialogflow` allows us to create different `intents` and assign key words or phrases. So, when we write any of them, matches with the `intent` and redirects to the corresponding route.
 
 Below, we see how to captures different intents (we need the integration with dialogflow enabled, as we have seen above):
 
@@ -31,4 +31,17 @@ Below, we see how to captures different intents (we need the integration with di
 {intent: "smalltalk.user.likes_agent", action: "funny"}
 ```
 
-* Deal with entities in action (req.input.entities)
+`Dialogflow` also has `entities` which are used for extracting parameter values from natural language inputs. `Entities` are stored inside the `input` and there can be more than one. Below, we see how to access the information of the entities. 
+```
+static async botonicInit({ req }) {
+  	console.log(req.input.entities)   
+}
+```
+
+Also, in `botonic.config.js` we can use `entites` in routes field like we use `text`, `payloads`, `intents`, etc. In this case, we have to do it through a function that verifies that entity is equal to a certain value. 
+
+```
+{entities: (e) => e.cities == 'New York City', action: "cities"}
+
+```
+Once the match exists, it will continue to execute the corresponding action.
