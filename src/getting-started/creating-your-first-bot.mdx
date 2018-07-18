@@ -30,8 +30,8 @@ To start a new bot, open your terminal/command prompt and run:
 $ botonic new testBot blank
 ```
 
-* `start` will tell the CLI create a new bot.
-* `testBot` will be the directory name and the bot name for your project.
+* `new` will tell the CLI to create a new bot.
+* `testBot` will be the directory name for your project.
 * `blank` will be the starter template for your project.
 
 Along with creating your project, this will also install node modules for the application, and make the first build.
@@ -51,7 +51,7 @@ $ cd testBot
 $ botonic run
 ```
 
-This will open an ineractive chat session with your bot. Just type any text and press enter to send a message to the bot. If you started with the "blank" template the bot will always respond with "I don't understand you". To finish the chat session type `/q` or `CTRL-C`.
+This will open an interactive chat session with your bot. Just type any text and press enter to send a message to the bot. If you started with the "blank" template the bot will always respond with "I don't understand you". To finish the chat session type `/q` or `CTRL-C`.
 
 ### Project Structure
 
@@ -110,17 +110,17 @@ This is the code that will be executed when the user types anything. As you can 
 * `render`: this is where you construct the answer of your bot. In this example we return just one message of type "text" whose content is the `echoText` variable defined before.
 
 > ### NOTE:
-> Usually the `render` method spits out HTML code in a typical React project. However, this is sent to messaging platforms like Whatsapp or Facebook Messenger so sending HTML won't work. We've created this HTML-like language called Rich Conversational Markup Language (RCML) to help you construct the bot response in a dynamic way.
+> Usually the `render` method spits out HTML code in a typical React project. However, this is sent to messaging platforms like Whatsapp or Facebook Messenger so sending HTML won't work. We've created this HTML-like language called [Rich Conversational Markup Language (RCML)](/api/rich-conversational-markup-language) to help you construct the bot response in a dynamic way.
 
 Now try to execute `botonic run` again and type "hello world" 😊
 
 ### Adding Natural Language Understanding
 
-You can go a long way capturing user inputs using regular expressions, but it obviously has its limitations. As you find yourself adding more and more functionality to your bot you get to a point where you need Natural Language Understanding (NLU) capabilities.
+You can go a long way capturing user inputs using regular expressions, but it obviously has its limitations. As you find yourself adding more and more functionality to your bot you get to a point where you need Natural [Language Understanding (NLU)](/api/nlu) capabilities.
 
 NLU lets you capture user inputs by "intent" instead of parsing its raw text. An intent represents all the different ways users can express a unit of meaning that is valid for your bot. For example, you can group the sentences "What's the weather in California?" and "Do you know if it's sunny today in California?" to the intent `get_weather` and the parameter `city=California`. You can then map that intent to an action using a route.
 
-Botonic has an NLU module under development, meanwhile, you can use our Dialogflow integration. [Dialogflow](https://dialogflow.com/) is Google's NLU as a service.
+Botonic has a NLU module under development, meanwhile, you can use our Dialogflow integration. [Dialogflow](https://dialogflow.com/) is Google's NLU as a service.
 
 #### 1. Create a free Dialogflow account
 
