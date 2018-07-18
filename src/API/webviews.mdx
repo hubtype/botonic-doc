@@ -13,20 +13,43 @@ Webviews are an essential part of Botonic and chatbots. This allows you to open 
 
 One simple example could be the posibility of creating a webview for picking different products, selecting a range of dates from a datepicker or even buying some books.
 
-With Botonic, it's easier to create webview than developing by your own the webpage and integrate it with the Facebook app, insert the Facebook SDK, keep the bot conversation flow, etc.
+With Botonic, it's easier to create webview than developing by your own a webpage and integrate it with the Facebook app, insert the Facebook SDK, keep the bot conversation flow, etc.
 
 > #### Note
 > The Webviews must be stored inside the `pages/webviews` folder.
 
 ## Steps
 
+### Invoke a webview
+
+You can only open a webview after a `button` or `quickreply`.
+
+```javascript
+<messages>
+    <message type="text">
+        Button with webview
+        <button url="webviews/hello_world">Webview1</button>
+    </message>
+    <message type="text">
+        Quickreply with webview
+        <reply url="webviews/close">Webview2</reply>
+    </message>
+</messages>
+
+```
+
+Now, let's create this two Webviews.
+
+### Create a webview
+
 #### BotonicWebview
 
-Facebook SDK is needed for opening a webview inside Messenger platform. We have encapsulated this information inside the BotonicWebview.
+Facebook SDK is needed for opening a webview inside Messenger platform. We have encapsulated this information inside `BotonicWebview`.
 
-In th `render()`function, we create the HTML page that is going to be loaded in the webview.
+In the `render()`function, we define the HTML page that is going to be displayed.
 
 **pages/webviews/hello_world.js**
+
 ```javascript
 import React from 'react'
 import BotonicWebview from 'botonic/lib/react/server/bundles/pages/webview'
@@ -44,23 +67,47 @@ export default class extends React.Component {
 }
 ```
 
-//TODO : whitelist of the domain(api.hubtype)
+>#### Note
+>To display a webview in your bot, you **must** whitelist the botonic domain `api.hubtype.com` in *whitelisted_domains* property of your [bot's Messenger Profile](https://developers.facebook.com/docs/messenger-platform/reference/messenger-profile-api/domain-whitelisting)
 
 #### CSS
 
-* next.config.js	
-* package.json
-* create _document.js
+In Botonic actions, importing css properties is as simple as is shown below.
 
-#### Import component
+```javascript
+import React from 'react'
+import "../style.css"
 
-* install it
-* add to next.config
-* maybe import to _document
+export default () => <div className="example">Hello World!</div>
+
+```
 
 #### Close Webview
 
-* function close with paylaod
+The close function allows you to send back data to the bot in order to continue with the conversation flow.
 
-## Button with Webview
+**pages/webviews/close.js**
+```javascript
+import React from 'react'
+import BotonicWebview from 'botonic/lib/react/server/bundles/pages/webview'
 
+export default class extends React.Component {
+
+	static async getInitialProps(args) {
+		return {...args.req}
+	}
+
+	render() {
+	    return (
+	      <div>
+	          <BotonicWebview/>
+	          <button onClick={() => BotonicWebview.close(this.props.context, 'PAYLOAD-DATA')}>
+	          	Close
+	          </button>
+	      </div>
+	    );
+  	}
+}
+```
+
+In this example, you can see that we have a button, and when it's triggered we send a postback to the bot with 'PAYLOAD-DATA' as a `payload`.
