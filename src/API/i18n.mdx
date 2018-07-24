@@ -1,0 +1,61 @@
+---
+name: 6. i18n
+route: /api/i18n
+menu: 3. API
+order: -6
+---
+
+# Internationalization
+
+## Introduction
+
+Building a bot that supports different languages requires you to separate your string literals from your RCML code.
+
+First, you need to add a `pages/locales` folder. Then, add a js file for each language you want to support. For example:
+
+`pages/locales/en.js`
+
+```javascript
+export default {
+    hi: {
+        text1: ["Hello!", "Hey there!", "Aloha"],
+        text2: ["What's up?", "How're you?"]
+    },
+    bye: {
+        text1: ["Bye!", "See you later", "Ciao"]
+    }
+}
+```
+
+As you can see, locales are just objects that can have any structure you want, the only requirements are that you must have the same structure for all languages and that leafs must be strings or arrays of strings. In the latter case, botonic will choose one of the strings randomly. This makes the user feel like they're having a more natural conversation.
+
+In order to use these locales in your responses, you need to import Botonic's `i18n` module. We suggest you import as \_, as it will make your code more concise. Then it's just a matter of accessing the string ID whenever we want to use it with `_('stringID')`, where `stringID` is the dotted path to access the string in you locales object.
+
+If you want to change the language for the current user, use the Botonic component method `setLocale(req, lang)`.
+
+This is an example of how to use it:
+
+```javascript
+import React from 'react'
+import { Botonic, i18n as _ } from 'botonic'
+
+
+export default class extends Botonic.React.Component {
+    static async botonicInit({req}) {
+        this.setLocale(req, 'en')
+    }
+
+  render() {
+    return (
+        <messages>
+            <message type="text">
+                {_('hi.text1')} 😊
+            </message>
+            <message type="text">
+                {_('hi.text2')}
+            </message>
+        </messages>
+    )
+  }
+}
+```

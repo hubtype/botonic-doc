@@ -1,0 +1,47 @@
+---
+name: 2. Human Handoff
+route: /tutorials-and-examples/human-handoff
+menu: 4. Tutorials & Examples
+order: -2
+---
+
+# Human Handoff
+
+[View on Github](https://github.com/hubtype/botonic/tree/master/templates/handoff)
+
+This template shows a very simple case of use where a user is transferred to a human agent through the chatbot. This conversation will appear as a new case on a ticketing tool like Zendesk, Hubtype Desk or Front. This integrations are only available from the botonic dashboard, so you must deploy your bot to try this feature.
+
+In this example we've set up a route in `botonic.config.js` that triggers the handoff when a user types "handoff":
+
+```javascript
+module.exports = {
+    routes: [
+        {text: /^handoff$/i, action: "transfer_agent"}
+    ]
+}
+```
+
+Then, in our `pages/actions/transfer_agent.js` file, we need to call the `humanHandoff` method inside `botonicInit` (which is executed when this action is triggered):
+
+```javascript
+import React from 'react'
+import { Botonic } from 'botonic'
+
+export default class extends Botonic.React.Component {
+
+  static async botonicInit({ req }) {
+
+   this.humanHandOff(req)
+  
+  }
+
+  render() {
+    return (
+        <message type="text">
+            Please, wait a second. You are being transferred to an agent.
+        </message>
+    )
+  }
+}
+
+```

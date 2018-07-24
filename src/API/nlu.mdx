@@ -39,7 +39,7 @@ static async botonicInit({ req }) {
 }
 ```
 
-Also, in `botonic.config.js` we can use `entites` in routes field like we use `text`, `payloads`, `intents`, etc. In this case, we have to do it through a function that verifies that entity is equal to a certain value. 
+Also, in `botonic.config.js` we can use `entities` in routes field like we use `text`, `payloads`, `intents`, etc. In this case, we have to do it through a function that verifies that entity is equal to a certain value. 
 
 ```javascript
 {entities: (e) => e.cities == 'New York City', action: "cities"}
