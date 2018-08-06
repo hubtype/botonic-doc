@@ -48,7 +48,7 @@ Buttons and quickreplies can have an url link, a payload attached, or a href att
 
 ### Carrousel
 
-You can render a dynamic and static carrousel following the below structure:
+You can render a dynamic and static carrousel(a.k.a. carousel which can be used like `type:"carousel"`) following the below structure:
 
 ```javascript
 static async botonicInit({ req }) {
@@ -79,9 +79,9 @@ render() {
 	            )}
 	        </message>
 	        <message type="text">
-	           And this is a static Carrousel
+	           And this is a static Carousel
 	        </message>
-	        <message type="carrousel">
+	        <message type="carousel">
 			    <element key="1">
 			        <image>https://botonic.io/images/botonic_react_logo-p-500.png</image>
 			        <title>Title1</title>
