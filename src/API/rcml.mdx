@@ -9,7 +9,7 @@ order: -3
 
 The RCML is a language that allows you to create intuitive and powerful conversations for your bots with diferent type of messages.
 
-As you may know there are different types of outputs that messaging apps support like quickreplies (https://developers.facebook.com/docs/messenger-platform/send-messages/quick-replies), carrousels (https://developers.facebook.com/docs/messenger-platform/send-messages/template/generic?locale=en_US#carousel), message button (https://core.telegram.org/bots/2-0-intro#callback-buttons), etc.
+As you may know there are different types of outputs that messaging apps support like quickreplies (https://developers.facebook.com/docs/messenger-platform/send-messages/quick-replies), carousels (https://developers.facebook.com/docs/messenger-platform/send-messages/template/generic?locale=en_US#carousel), message button (https://core.telegram.org/bots/2-0-intro#callback-buttons), etc.
 
 Below you can see some examples on how to render these components using RCML.
 
@@ -33,7 +33,7 @@ Buttons and quickreplies can have an url link, a payload attached, or a href att
         Here I display two types of buttons, the first one is a URL button
         and the second is a payload button:
         <button url="https://botonic.io">Visit botonic.io</button>
-        <button payload="carrousel">Show me a carrousel</button>
+        <button payload="carousel">Show me a carousel</button>
     </message>
     <message type="text">
         And now, I display two quickreplies with a payload:
@@ -46,9 +46,9 @@ Buttons and quickreplies can have an url link, a payload attached, or a href att
 
 <img src="https://botonic-doc-static.netlify.com/images/buttons.png" style={{display: 'block', margin: 'auto'}} />
 
-### Carrousel
+### Carousel
 
-You can render a dynamic and static carrousel(a.k.a. carousel which can be used like `type:"carousel"`) following the below structure:
+You can render a dynamic and static carousel following the below structure:
 
 ```javascript
 static async botonicInit({ req }) {
@@ -66,9 +66,9 @@ render() {
 	return (
 	    <messages>
 	        <message type="text">
-	            This a dynamic Carrousel
+	            This a dynamic Carousel
 	        </message>
-	        <message type="carrousel">
+	        <message type="carousel">
 	            {this.props.context.movies.map((e, i) => 
 	                <element key={e.name}>
 	                    <image>{e.pic}</image>
@@ -107,7 +107,7 @@ render() {
 ```
 *Example of how it looks in the Messenger app:*
 
-<img src="https://botonic-doc-static.netlify.com/images/carrousel.gif" style={{display: 'block', margin: 'auto'}}/>
+<img src="https://botonic-doc-static.netlify.com/images/carousel.gif" style={{display: 'block', margin: 'auto'}}/>
 
 ### Media Files
 
