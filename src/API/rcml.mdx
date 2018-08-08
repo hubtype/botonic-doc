@@ -71,7 +71,7 @@ render() {
 	        <message type="carousel">
 	            {this.props.context.movies.map((e, i) => 
 	                <element key={e.name}>
-	                    <image>{e.pic}</image>
+	                    <pic>{e.pic}</pic>
 	                    <title>{e.name}</title>
 	                    <desc>{e.desc}</desc>
 	                    <button url={e.url}>Visit website</button>
@@ -83,19 +83,19 @@ render() {
 	        </message>
 	        <message type="carousel">
 			    <element key="1">
-			        <image>https://botonic.io/images/botonic_react_logo-p-500.png</image>
+			        <pic>https://botonic.io/images/botonic_react_logo-p-500.png</pic>
 			        <title>Title1</title>
 			        <desc>Subtitle1</desc>
 			        <button url="https://botonic.io">Visit botonic.io</button>
 			    </element>
 			    <element key="2">
-			        <image>https://botonic.io/images/botonic_react_logo-p-500.png</image>
+			        <pic>https://botonic.io/images/botonic_react_logo-p-500.png</pic>
 			        <title>Title2</title>
 			        <desc>Subtitle2</desc>
 			        <button url="https://botonic.io">Visit botonic.io</button>
 			    </element>
 			    <element key="3">
-			        <image>https://botonic.io/images/botonic_react_logo-p-500.png</image>
+			        <pic>https://botonic.io/images/botonic_react_logo-p-500.png</pic>
 			        <title>Title3</title>
 			        <desc>Subtitle3</desc>
 			        <button url="https://botonic.io">Visit botonic.io</button>
