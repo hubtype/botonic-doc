@@ -16,6 +16,8 @@ Botonic allows creating simple actions without any logic inside. The simplest re
 **pages/actions/hello_world.js**
 
 ```javascript
+import React from 'react'
+
 export default () =>
     <message type="text">
         Hello World
@@ -29,6 +31,7 @@ The essential purpose of the Botonic Component is to enable making API calls, ha
 **pages/actions/john_doe.js**
 
 ```javascript
+import React from 'react'
 import { Botonic } from 'botonic'
 
 export default class extends Botonic.React.Component {
@@ -78,6 +81,7 @@ In order to redirect the conversation to an agent in a specific action, you call
 //TODO say something it's our dashboard?
 
 ```javascript
+import React from 'react'
 import { Botonic } from 'botonic'
 export default class extends Botonic.React.Component {
 
