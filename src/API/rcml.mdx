@@ -25,7 +25,7 @@ The "Hello World!" output would be defined as below:
 
 ### Buttons and Quickreplies
 
-Buttons and quickreplies can have an url link, a payload attached, or a href attribute.
+Buttons and quickreplies can have an url link, a payload attached, a href attribute, or an action to be triggered.
 
 ```javascript
 <messages>
@@ -36,9 +36,10 @@ Buttons and quickreplies can have an url link, a payload attached, or a href att
         <button payload="carousel">Show me a carousel</button>
     </message>
     <message type="text">
-        And now, I display two quickreplies with a payload:
+        And now, I display three quickreplies, two with a payload and one triggering an action:
         <reply payload="yes">Cool</reply>
         <reply payload="no">Nah..</reply>
+        <reply action="paradise">Take me to paradise</reply>
     </message>
 </messages>
 ```
