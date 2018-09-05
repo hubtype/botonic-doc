@@ -1,0 +1,28 @@
+---
+name: Important notes 
+route: /api/project-configuration/project_conf
+menu: 5. About project configuration
+order: 1
+---
+
+## Botonic Directory Organization
+
+### next.config.js
+
+This file contains basically Next.js configuration parameters. It is very important that you add the corresponding dependencies in this file for the proper performance. Here there is an example:
+
+```javascript
+const withCSS = require('@zeit/next-css')
+const withTM = require('@weco/next-plugin-transpile-modules')
+module.exports = withTM(withCSS({
+  webpack: (config, { buildId, dev, isServer, defaultLoaders }) => {
+    config.node = {
+      fs: 'empty',
+      module: "empty",
+    };
+    return config;
+  },
+  transpileModules: ['my_first_dependency_name', 'my_second_dependency_name', '...']
+}));
+
+
