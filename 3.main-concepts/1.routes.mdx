@@ -1,23 +1,25 @@
 ---
 name: 1. Routes
-route: /api/routes
-menu: 3. API
-order: 1
+route: /main-concepts/routes
+menu: 3. Main Concepts
 ---
 
-# Routes
+# **Routes**
 
-Routes map user inputs to actions (React Components)
+Basically, routes map user inputs to actions (React Components)
 
-A user input is an object that has some fields:
+## User inputs
 
-- Type -->. It is the input type, and it can be one of the followings: `text`, `postback`, `image`, `video`, `audio`, `document`, `location`. 
+The user input is captured as an object that has some fields:
 
-- Data --> contains raw text (or attachment URL if it's a media type). 
+* **Type:** it is the input type, and it can be one of the followings:  
+`text`, `postback`, `audio`, `image`,  `video`, `document`, `location`, `referral` 
 
-- Payload --> field is used when the user has clicked on a button or quick reply. 
+* **Data:** contains raw text (or attachment URL if it's a media type). 
 
-- Intent --> which match Intent ID according to the NLP backend with the integration.
+* **Payload:** field is used when the user has clicked on a button or quick reply. 
+
+* **Intent:** which match Intent ID according to the NLP backend with the integration.
 
 ```javascript
 {
@@ -27,15 +29,26 @@ A user input is an object that has some fields:
     intent: "smalltalk.greeting"
 }
 ```
-Every route (an entry in this array) is composed by a matching rule and an action.
-A matching rule looks like this: `{attribute: test}`, which basically means: "take that
-attribute from the user input and apply the test" if test passes, the action defined in
-that route will be triggered.
 
-There are 3 types of tests:
-- String --> Perfect match
-- Regexp --> Pass the regular expression
-- Function --> Passes if the funtion returns true
+## Mapping user inputs into actions
+
+Every route, which is an entry in the routes' array can be defined in `botonic.config.js`:
+
+```javascript
+module.exports = {
+    routes: [
+
+    ]
+}
+```
+
+Conceptually, a route is composed by a matching rule and an action. A matching rule looks like this: `{attribute: test}`,  
+which basically means: "take that attribute from the user input and apply the test" if test passes, the action defined in that route will be triggered.
+
+There are 3 different ways of passing these tests:
+* **String:** Perfect match
+* **Regexp:** Pass the regular expression
+* **Function:** Passes if the function returns true
 
 The rules will be tested in order so if the 1st rule matches, Botonic won't test
 other routes and will execute the 1st action.
@@ -43,7 +56,7 @@ If there are several matching rules in the same route, all of them have to pass
 to consider a match.
 
 In the following example, the first rule matches if and only if we get the text `start` and will execute the
-React component defined in `pages/actions/start.js`
+React component defined in `src/actions/start.js`
 
 ```javascript
 {text: "start", action: "start"}
@@ -53,7 +66,7 @@ Below, another text rule (perfect match) to trigger the `end` action
 {text: "end", action: "end"}
 ```
 These rules use a case insensitive regexp to match text messages that contain
-a certain text. For the example below, will capture 'BUTTONS', 'Buttons', etc.
+a certain text. For the example below, will capture 'BUTTONS', 'Buttons', etc. 
 
 ```javascript
 {text: /^buttons$/i, action: "buttons"}

@@ -2,10 +2,9 @@
 name: 3. Dynamic Carrousel
 route: /tutorials-and-examples/dynamic-carrousel
 menu: 4. Tutorials & Examples
-order: -3
 ---
 
-# Dynamic Carrousel
+# **Dynamic Carrousel**
 
 [View on Github](https://github.com/hubtype/botonic/tree/master/templates/dynamic_carrousel)
 
@@ -15,7 +14,7 @@ First of all, we ask what are the user interests. When we get it, we generate th
 
 Also, at the `static async botonicInit({req})` necessary calls are made to grasp the values of api, which must be stored in any place in the context so that they can be passed as parameters. 
 
-To make the call, we need `import fetch from 'isomorphic-unfetch'` which needs to pass the url, the method that in this case is a `GET method` and the parameters if needed. This call returns all the information on the `api`.
+To make the call, we need `import fetch from 'isomorphic-fetch'` which needs to pass the url, the method that in this case is a `GET method` and the parameters if needed. This call returns all the information on the `api`.
 When we have all the product information, we can display the carrousel.
 The carrousel can have at most ten elements, where each element will represent one product and will have its `name`, the `price`, an `image` and a `link` to the product page.
 
@@ -24,10 +23,9 @@ For access to these values, we do a loop with all the products where we extract 
 
 ```javascript
 import React from 'react'
-import { Botonic } from 'botonic'
 import fetch from 'isomorphic-fetch'
 
-export default class extends Botonic.React.Component {
+export default class extends React.Component {
 
   static async botonicInit({ req }) {
 

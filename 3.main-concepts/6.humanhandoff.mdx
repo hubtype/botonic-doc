@@ -1,0 +1,31 @@
+---
+name: 6. Human Handoff
+route: /main-concepts/human-handoff
+menu: 3. Main Concepts
+---
+
+# **Human Handoff**
+
+As bots aren’t perfects, we allow to transfer a conversation into an agent.
+
+In order to redirect the conversation to an agent in a specific action, you call the function `this.humanHandOff()` inside `botonicInit`.Then, the conversation is going to be transfered to the platform you have configured.
+//TODO say something it's our dashboard?
+
+```javascript
+import React from 'react'
+import { Botonic } from 'botonic'
+export default class extends Botonic.React.Component {
+
+  static async botonicInit({ req }) {
+    this.humanHandOff()
+  }
+
+  render() {
+    return (
+        <message type="text">
+            You are going to be transfered to an agent!
+        </message>
+    )
+  }
+}
+```

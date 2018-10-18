@@ -2,10 +2,9 @@
 name: 1. Guided Flow
 route: /tutorials-and-examples/guided-flow
 menu: 4. Tutorials & Examples
-order: -1
 ---
 
-# Guided Flow
+# **Guided Flow**
 
 [View on Github](https://github.com/hubtype/botonic/tree/master/templates/childs)
 
@@ -45,9 +44,8 @@ When the user starts the conversation the bot will ask whether he wants to eat p
 
 ```javascript
 import React from 'react'
-import { Botonic } from 'botonic'
 
-export default class extends Botonic.React.Component {
+export default class extends React.Component {
 
   render() {
     return (
@@ -102,9 +100,8 @@ Note that you can specify directly what action has to be triggered when answerin
 
 ```javascript
 import React from 'react'
-import { Botonic } from 'botonic'
 
-export default class extends Botonic.React.Component {
+export default class extends React.Component {
 
   render() {
     return (
@@ -126,9 +123,8 @@ Since every action is linked in the same way as URL's do, you can also pass addi
 
 ```javascript
 import React from 'react'
-import { Botonic } from 'botonic'
 
-export default class extends Botonic.React.Component {
+export default class extends React.Component {
 
   render() {
     return (
@@ -146,9 +142,8 @@ Then you can access its parameters in the following way in `pages/actions/pizza.
 
 ```javascript
 import React from 'react'
-import { Botonic } from 'botonic'
 
-export default class extends Botonic.React.Component {
+export default class extends React.Component {
 
   render() {
     if(this.props.params.ans == "spicy"){
