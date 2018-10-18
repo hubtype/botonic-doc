@@ -2,13 +2,12 @@
 name: 2. Creating Your First Bot
 route: /getting-started/creating-your-first-bot
 menu: 2. Getting Started
-order: -2
 ---
 
 import { NextButton } from '../components/nextButton.tsx'
 
 
-# Creating Your First Bot
+# **Creating Your First Bot**
 
 Now that you have [Botonic and its dependencies installed](/getting-started/installation), you can build your first bot!
 
@@ -22,7 +21,7 @@ In this tutorial you will:
 
 Let’s get started!
 
-### Starting a New Botonic Bot
+## Starting a new Botonic Bot
 
 To start a new bot, open your terminal/command prompt and run:
 
@@ -42,7 +41,7 @@ Along with the blank template, Botonic also provides the following official temp
 
 If you don’t specify a template at the start, you will be prompted to pick one.
 
-### Testing the bot locally
+## Testing the bot locally
 
 Now, you can `cd` into the folder that was created. To get a quick preview of your bot in your terminal, use the `run` command.
 
@@ -53,15 +52,17 @@ $ botonic run
 
 This will open an interactive chat session with your bot. Just type any text and press enter to send a message to the bot. If you started with the "blank" template the bot will always respond with "I don't understand you". To finish the chat session type `/q` or `CTRL-C`.
 
-### Project Structure
+## Project Structure
 
 * `botonic.config.js`: Main configuration file for your bot. Here you'll define routes, which map user inputs to actions, and integrations with 3rd party services, like NLP platforms.
-* `pages`: This is where your React components live, there are 2 types of them:
-  * `actions`: Actions are the units of logic that your bot can perform and where the responses of your bot are defined.
+* `src`: This is where all your code lives. Inside, we have structured it as follows:
+  * `actions`: Actions are the units of logic that your bot can perform and where the responses of your bot are defined. You are free to organize them into subdirectories.
   * `webviews`: Webviews are small web pages that pop up in the middle of the conversation flow. This lets you offer experiences and features that might be difficult to offer with message bubbles, such as picking products to buy, seats to book, or dates to reserve.
-* `...`: The rest of the files are needed for the [babel](https://babeljs.io/) compiler and [Next.js](https://github.com/zeit/next.js/) configuration. Modify them at your own risk!
+  * `locales`: Locales are objects from which your bot takes your multilanguage definitions. This is useful if you want that your bot addresses to different audiences.
+  * `assets`: Assets is where you can store all the media required for your bot. 
+* `...`: The rest of the files are needed for the [babel](https://babeljs.io/) and [Botonic](https://github.com/hubtype/botonic) project configuration. We suggest you to not modify its contents, and if not, it's at your own risk!
 
-### Adding basic functionality to your bot
+## Adding basic functionality to your bot
 
 Let's start by creating an "echo" bot that just repeats what the user say. So if the user says "hello world" the bot will respond with "hello world".
 
@@ -82,13 +83,12 @@ module.exports = {
 
 #### Create an action
 
-Next, create a new file inside `pages/actions` named "echo.js" and paste this code:
+Next, create a new file inside `src/actions` named "echo.js" and paste this code:
 
 ```javascript
 import React from 'react'
-import { Botonic } from 'botonic'
 
-export default class extends Botonic.React.Component {
+export default class extends React.Component {
 
   static async botonicInit({ req }) {
     req.context.echoText = req.input.data
@@ -109,12 +109,12 @@ This is the code that will be executed when the user types anything. As you can 
 * `botonicInit`: This code will be executed first, right when the component is created. In this case, we just take whatever text the user sent us from `req.input.data`. Usually, this is the place where you perform the bulk of your logic, like calling your API. The `req` (for "request") parameter has a special object called "context" where you can store variables that will stick throughout the active session.
 * `render`: this is where you construct the answer of your bot. In this example we return just one message of type "text" whose content is the `echoText` variable defined before.
 
-> ### NOTE:
+> #### NOTE:
 > Usually the `render` method spits out HTML code in a typical React project. However, this is sent to messaging platforms like Whatsapp or Facebook Messenger so sending HTML won't work. We've created this HTML-like language called [Rich Conversational Markup Language (RCML)](/api/rich-conversational-markup-language) to help you construct the bot response in a dynamic way.
 
 Now try to execute `botonic run` again and type "hello world" 😊
 
-### Adding Natural Language Understanding
+## Adding Natural Language Understanding
 
 You can go a long way capturing user inputs using regular expressions, but it obviously has its limitations. As you find yourself adding more and more functionality to your bot you get to a point where you need Natural [Language Understanding (NLU)](/api/nlu) capabilities.
 
@@ -175,7 +175,7 @@ Routes are checked in order, that's why we put the more specific ones first and 
 
 Finally, just crete a couple of actions that respond to these intents:
 
-**pages/actions/age.js**
+**src/actions/age.js**
 
 ```javascript
 import React from 'react'
@@ -186,7 +186,7 @@ export default () =>
     </message>
 ```
 
-**pages/actions/smalltalk.js**
+**src/actions/smalltalk.js**
 
 ```javascript
 import React from 'react'
@@ -202,7 +202,7 @@ export default () =>
     </messages>
 ```
 
-Note that if you just have to return some static messages it's not necessary to create a full `Botonic.React.Component` subclass. It's enough to export a function that returns the messages in RCML.
+Note that if you just have to return some static messages it's not necessary to declare the `botonicInit` method. It's enough to export a function that returns the messages in RCML.
 
 That's it! You can run `botonic run` and play a little bit. Try adding more routes/actions for different Dialogflow intents. When you're ready, go to the next section to learn how to put your bot in production and publish it to messaging platforms like Facebook Messenger.
 

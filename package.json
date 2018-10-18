@@ -4,7 +4,10 @@
     "build": "docz build --ts"
   },
   "devDependencies": {
-    "docz": "^0.3.4",
+    "docz": "^0.12.5",
     "typescript": "^2.8.3"
+  },
+  "dependencies": {
+    "buble": "0.19.4"
   }
 }

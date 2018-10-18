@@ -1,19 +1,16 @@
 ---
 name: 3. Rich Conversational Markup Language (RCML)
-route: /api/rich-conversational-markup-language
-menu: 3. API
-order: -3
+route: /main-concepts/rich-conversational-markup-language
+menu: 3. Main Concepts
 ---
 
-# RCML
+# **RCML**
 
-The RCML is a language that allows you to create intuitive and powerful conversations for your bots with diferent type of messages.
+The RCML is a language that allows you to create intuitive and powerful conversations for your bots with different type of messages. As you may know there are different types of outputs that messaging apps support like [quickreplies](https://developers.facebook.com/docs/messenger-platform/send-messages/quick-replies), [carousels](https://developers.facebook.com/docs/messenger-platform/send-messages/template/generic?locale=en_US#carousel), [message buttons](https://core.telegram.org/bots/2-0-intro#callback-buttons), etc.
 
-As you may know there are different types of outputs that messaging apps support like quickreplies (https://developers.facebook.com/docs/messenger-platform/send-messages/quick-replies), carousels (https://developers.facebook.com/docs/messenger-platform/send-messages/template/generic?locale=en_US#carousel), message button (https://core.telegram.org/bots/2-0-intro#callback-buttons), etc.
+Below you can see some examples of how to render these components using RCML.
 
-Below you can see some examples on how to render these components using RCML.
-
-### Text
+## Text
 
 The "Hello World!" output would be defined as below:
 
@@ -23,9 +20,7 @@ The "Hello World!" output would be defined as below:
 </message>
 ```
 
-### Buttons and Quickreplies
-
-Buttons and quickreplies can have an url link, a payload attached, a href attribute, or an action to be triggered.
+## Buttons
 
 ```javascript
 <messages>
@@ -35,82 +30,75 @@ Buttons and quickreplies can have an url link, a payload attached, a href attrib
         <button url="https://botonic.io">Visit botonic.io</button>
         <button payload="carousel">Show me a carousel</button>
     </message>
-    <message type="text">
-        And now, I display three quickreplies, two with a payload and one triggering an action:
-        <reply payload="yes">Cool</reply>
-        <reply payload="no">Nah..</reply>
-        <reply action="paradise">Take me to paradise</reply>
-    </message>
 </messages>
 ```
 *Example of how it looks in the Messenger platform:*
+<img src="https://botonic-doc-static.netlify.com/images/buttons.png" style={{display: 'block', margin: 'auto', 'max-width': '50%'}}/>
 
-<img src="https://botonic-doc-static.netlify.com/images/buttons.png" style={{display: 'block', margin: 'auto'}} />
+## Quickreplies
+```javascript
+<messages>
+  <message type="text">
+      I will show you three quickreplies. One with a payload, one to go to an action and another to pass values to that action:
+      <reply payload="yes">Cool</reply>
+      <reply action="paradise">Take me to paradise</reply>
+      <reply action="paradise?withfruit='coconut'">To a better paradise</reply>
+  </message>
+</messages>
+```
+*Example of how it looks in the Messenger platform:*
+<img src="https://botonic-doc-static.netlify.com/images/quickreplies.png" style={{display: 'block', margin: 'auto', 'max-width': '60%'}}/>
 
-### Carousel
+
+> #### NOTE:
+> Buttons and quickreplies can have an url link, a payload attached, a href attribute, or an action to be triggered. When passing parameters through actions as seen in the example, the data will be accessiblein the field `params` inside the `req` object.
+
+## Carousel
 
 You can render a dynamic and static carousel following the below structure:
 
 ```javascript
+import React from 'react'
+
+export default class extends React.Component {
+
 static async botonicInit({ req }) {
-	req.context.movies = [
-	    {name: 'Pulp Fiction', desc: 'Le Big Mac', url: 'https://www.imdb.com/title/tt0110912', 
-	    pic: 'https://images-na.ssl-images-amazon.com/images/I/51Z95XQDHRL._SY445_.jpg'},
-	    {name: 'The Big Lebowski', desc: 'Fuck it Dude', url: 'https://www.imdb.com/title/tt0118715', 
-	    pic: 'https://www.thelinda.org/wp-content/uploads/2018/02/Big-L-2-1.jpg'},
-	    {name: 'Snatch', desc: 'Five minutes, Turkish', url: 'https://www.imdb.com/title/tt0208092', 
-	    pic: 'http://www.libertytuga.pt/wp-content/uploads/2011/11/snatch.jpg'},
-	]
+    req.context.movies = [
+        {name: 'Pulp Fiction', desc: 'Le Big Mac', url: 'https://www.imdb.com/title/tt0110912', 
+        pic: 'https://images-na.ssl-images-amazon.com/images/I/51Z95XQDHRL._SY445_.jpg'},
+        {name: 'The Big Lebowski', desc: 'Fuck it Dude', url: 'https://www.imdb.com/title/tt0118715', 
+        pic: 'https://www.thelinda.org/wp-content/uploads/2018/02/Big-L-2-1.jpg'},
+        {name: 'Snatch', desc: 'Five minutes, Turkish', url: 'https://www.imdb.com/title/tt0208092', 
+        pic: 'http://www.libertytuga.pt/wp-content/uploads/2011/11/snatch.jpg'},
+    ]
 }
 
 render() {
-	return (
-	    <messages>
-	        <message type="text">
-	            This a dynamic Carousel
-	        </message>
-	        <message type="carousel">
-	            {this.props.context.movies.map((e, i) => 
-	                <element key={e.name}>
-	                    <pic>{e.pic}</pic>
-	                    <title>{e.name}</title>
-	                    <desc>{e.desc}</desc>
-	                    <button url={e.url}>Visit website</button>
-	                </element>
-	            )}
-	        </message>
-	        <message type="text">
-	           And this is a static Carousel
-	        </message>
-	        <message type="carousel">
-			    <element key="1">
-			        <pic>https://botonic.io/images/botonic_react_logo-p-500.png</pic>
-			        <title>Title1</title>
-			        <desc>Subtitle1</desc>
-			        <button url="https://botonic.io">Visit botonic.io</button>
-			    </element>
-			    <element key="2">
-			        <pic>https://botonic.io/images/botonic_react_logo-p-500.png</pic>
-			        <title>Title2</title>
-			        <desc>Subtitle2</desc>
-			        <button url="https://botonic.io">Visit botonic.io</button>
-			    </element>
-			    <element key="3">
-			        <pic>https://botonic.io/images/botonic_react_logo-p-500.png</pic>
-			        <title>Title3</title>
-			        <desc>Subtitle3</desc>
-			        <button url="https://botonic.io">Visit botonic.io</button>
-			    </element>
-			</message>
-	    </messages>
-	)
+    return (
+        <messages>
+            <message type="text">
+                This a dynamic Carousel
+            </message>
+            <message type="carousel">
+                {this.props.context.movies.map((e, i) => 
+                    <element key={e.name}>
+                        <pic>{e.pic}</pic>
+                        <title>{e.name}</title>
+                        <desc>{e.desc}</desc>
+                        <button url={e.url}>Visit website</button>
+                    </element>
+                )}
+            </message>
+        </messages>
+    )
+}
 }
 ```
 *Example of how it looks in the Messenger app:*
 
-<img src="https://botonic-doc-static.netlify.com/images/carousel.gif" style={{display: 'block', margin: 'auto'}}/>
+<img src="https://botonic-doc-static.netlify.com/images/carrousel.gif" style={{display: 'block', margin: 'auto'}}/>
 
-### Media Files
+## Media Files
 
 You can send all this types of media files:
 
@@ -119,20 +107,13 @@ You can send all this types of media files:
 	<message type="image" src="https://botonic.io/images/botonic_react_logo-p-500.png"/>
 	<message type="video" src="https://www.w3schools.com/html/mov_bbb.mp4"/>
 	<message type="audio" src="https://www.w3schools.com/html/horse.mp3"/>
+  <message type="document" src="http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf"/>
 </messages>
 ```
-*Example of the three types of messages:*
+*Example of the media types:*
 <img src="https://botonic-doc-static.netlify.com/images/media_files.png" style={{display: 'block', margin: 'auto', paddingLeft: '25%', maxHeight: '500px'}}/>
 
-### Document
-
-```javascript
-<messages>
-	<message type="document" src="http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf"/>
-</messages>
-```
-
-### Location
+## Location
 
 ```javascript
 <messages>
@@ -142,19 +123,19 @@ You can send all this types of media files:
     </message>
 </messages>
 ```
-*Example of the document file and location in Facebook Messenger:*
+*Example in Facebook Messenger:*
 <img src="https://botonic-doc-static.netlify.com/images/doc_location.png" style={{display: 'block', margin: 'auto'}}/>
 
 
-### Share Button
+## Share Button
 
 You are able to share your desired content with your friends and acquaintances with the following piece of code:
 
 ```javascript
 import React from 'react'
-import { Botonic } from 'botonic'
+import { ShareButton } from '@botonic/react'
 
-export default class extends Botonic.React.Component {
+export default class extends React.Component {
   
   static async botonicInit({ req }) {
 
@@ -193,7 +174,7 @@ export default class extends Botonic.React.Component {
       <messages>
         <message type="text">
           I am a share button!
-          <Botonic.ShareButton payload={this.props.my_share_button}></Botonic.ShareButton>
+          <ShareButton payload={this.props.my_share_button}></ShareButton>
         </message>
       </messages>           
     ) 
@@ -203,22 +184,22 @@ export default class extends Botonic.React.Component {
 *This will produce the following output in Facebook Messenger:*
 <img src="https://botonic-doc-static.netlify.com/images/share_1.png" style={{display: 'block', margin: 'auto'}}/>
 
-*After clicking on it:*
+*After clicking on it, your defined elements will be displayed:*
 <img src="https://botonic-doc-static.netlify.com/images/share_2.png" style={{display: 'block', margin: 'auto'}}/>
 
-*On the receiver side:*
+*This is how it looks on the receiver side:*
 <img src="https://botonic-doc-static.netlify.com/images/share_3.png" style={{display: 'block', margin: 'auto'}}/>
 
 
-### Message Templates
+## Message Templates
 
-If you want more degrees of freedom, you can also define your messages like this:
+If you want more degrees of freedom, you can also define your templates like in this example.
 
 ```javascript
 import React from 'react'
-import { Botonic } from 'botonic'
+import { MessageTemplate } from '@botonic/react'
 
-export default class extends Botonic.React.Component {
+export default class extends React.Component {
   
   static async botonicInit({ req }) {
 
@@ -287,25 +268,23 @@ export default class extends Botonic.React.Component {
     return {my_message_template: my_message_template}
   }
 
-
   render() {
     return(
       <messages>
         <message type="text">
         I am a message template!
-        <Botonic.MessageTemplate payload={this.props.my_message_template}></Botonic.MessageTemplate>
+        <MessageTemplate payload={this.props.my_message_template}></MessageTemplate>
         </message>
       </messages>           
     ) 
   }
-
 }
 
 ```
 
-*...that will produce this nice boarding pass.*
+*In this case, this template will produce this nice boarding pass.*
 <img src="https://botonic-doc-static.netlify.com/images/message_template.png" style={{display: 'block', margin: 'auto'}}/>
 
 
-Take profit from this example and let's do your own stuff.
+Take profit from this example and let's do your own stuff. Have a look at the different [templates](https://developers.facebook.com/docs/messenger-platform/send-messages/templates) available.
 

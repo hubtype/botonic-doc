@@ -2,10 +2,9 @@
 name: 2. Human Handoff
 route: /tutorials-and-examples/human-handoff
 menu: 4. Tutorials & Examples
-order: -2
 ---
 
-# Human Handoff
+# **Human Handoff**
 
 [View on Github](https://github.com/hubtype/botonic/tree/master/templates/handoff)
 
@@ -21,7 +20,7 @@ module.exports = {
 }
 ```
 
-Then, in our `pages/actions/transfer_agent.js` file, we need to call the `humanHandoff` method inside `botonicInit` (which is executed when this action is triggered):
+Then, in our `pages/actions/transfer_agent.js` file, we need to call the `humanHandoff` method inside `botonicInit({ req })` (which is executed when this action is triggered):
 
 ```javascript
 import React from 'react'
