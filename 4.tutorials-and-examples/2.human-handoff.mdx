@@ -6,9 +6,9 @@ menu: 4. Tutorials & Examples
 
 # **Human Handoff**
 
-[View on Github](https://github.com/hubtype/botonic/tree/master/templates/handoff)
+[View on Github](https://github.com/hubtype/botonic/tree/master/packages/botonic-cli/templates/handoff)
 
-This template shows a very simple case of use where a user is transferred to a human agent through the chatbot. This conversation will appear as a new case on a ticketing tool like Zendesk, Hubtype Desk or Front. This integrations are only available from the botonic dashboard, so you must deploy your bot to try this feature.
+This template shows a very simple case of use where a user is transferred to a human agent through the chatbot. This conversation will appear as a new case on Hubtype Desk.
 
 In this example we've set up a route in `botonic.config.js` that triggers the handoff when a user types "handoff":
 
@@ -20,26 +20,44 @@ module.exports = {
 }
 ```
 
-Then, in our `pages/actions/transfer_agent.js` file, we need to call the `humanHandoff` method inside `botonicInit({ req })` (which is executed when this action is triggered):
+Then, in our `pages/actions/transfer_agent.js` file, we need to call the `humanHandoff` method inside `botonicInit`.
+Additionally, we check if the 'Customer Support' queue is opened:
 
 ```javascript
 import React from 'react'
-import { Botonic } from 'botonic'
+const Botonic = require('@botonic/core')
 
 export default class extends Botonic.React.Component {
 
   static async botonicInit({ req }) {
 
-   this.humanHandOff(req)
+    let openQueues = await Botonic.getOpenQueues(req)
+    openQueues = openQueues['queues']
+    let is_hanfOff = false
+    if(openQueues.indexOf('Customer Support') !== -1){
+      await Botonic.humanHandOff(req, 'Customer Support', {action: 'thanks_for_contacting'})
+      is_hanfOff = true
+    }
+    return {req, is_hanfOff}
   
   }
 
   render() {
-    return (
-        <message type="text">
-            Please, wait a second. You are being transferred to an agent.
-        </message>
-    )
+    if(this.props.is_hanfOff){
+      return(
+        <messages>
+          <message type="text">
+            You are being trasnfered to an agent!
+          </message>
+        </messages>
+      )
+    }else {
+      return(
+        <messages>
+          Sorry, right now we can't serve you...Please contact us later!
+        </messages>
+      )
+    }
   }
 }
 
