@@ -4,7 +4,7 @@
     "build": "docz build --ts"
   },
   "devDependencies": {
-    "docz": "^0.12.5",
+    "docz": "^0.12.9",
     "typescript": "^2.8.3"
   },
   "dependencies": {

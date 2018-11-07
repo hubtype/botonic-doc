@@ -54,8 +54,9 @@ This will open an interactive chat session with your bot. Just type any text and
 
 ## Project Structure
 
-* `botonic.config.js`: Main configuration file for your bot. Here you'll define routes, which map user inputs to actions, and integrations with 3rd party services, like NLP platforms.
+* `botonic.config.js`: Main configuration file for your bot. Here you can define your integrations with 3rd party services, like NLP platforms, or changing typing options of the bot.
 * `src`: This is where all your code lives. Inside, we have structured it as follows:
+  * `routes.js`: Here you'll define routes, which map user inputs to actions.
   * `actions`: Actions are the units of logic that your bot can perform and where the responses of your bot are defined. You are free to organize them into subdirectories.
   * `webviews`: Webviews are small web pages that pop up in the middle of the conversation flow. This lets you offer experiences and features that might be difficult to offer with message bubbles, such as picking products to buy, seats to book, or dates to reserve.
   * `locales`: Locales are objects from which your bot takes your multilanguage definitions. This is useful if you want that your bot addresses to different audiences.
@@ -68,7 +69,7 @@ Let's start by creating an "echo" bot that just repeats what the user say. So if
 
 #### Create a route
 
-The first step is to create a route that captures any text. Edit your `botonic.config.js` file and add a new rule `{text: /^.+$/, action: "echo"}` inside the `routes` section:
+The first step is to create a route that captures any text. Edit your `src/routes.js` file and add a new rule `{text: /^.+$/, action: "echo"}` inside the `routes` section:
 
 ```javascript
 module.exports = {
@@ -141,9 +142,6 @@ module.exports = {
             token: "YOUR_DIALOGFLOW_API_TOKEN" // <-- Put yout token here
         }
     },
-    routes: [
-        {text: /^.+$/, action: "echo"}
-    ]
 }
 ```
 
@@ -155,11 +153,6 @@ Now it's just a matter of adding more routes that capture different intents and 
 
 ```javascript
 module.exports = {
-    integrations: {
-        dialogflow: {
-            token: "YOUR_DIALOGFLOW_API_TOKEN"
-        }
-    },
     routes: [
         {intent: "smalltalk.agent.age", action: "age"},
         {intent: /^smalltalk/, action: "smalltalk"},
