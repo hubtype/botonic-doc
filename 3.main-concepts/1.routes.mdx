@@ -45,10 +45,11 @@ module.exports = {
 Conceptually, a route is composed by a matching rule and an action. A matching rule looks like this: `{attribute: test}`,  
 which basically means: "take that attribute from the user input and apply the test" if test passes, the action defined in that route will be triggered.
 
-There are 3 different ways of passing these tests:
+There are 4 different ways of passing these tests:
 * **String:** Perfect match
 * **Regexp:** Pass the regular expression
 * **Function:** Passes if the function returns true
+* **Input:** Passes if the condition is met
 
 The rules will be tested in order so if the 1st rule matches, Botonic won't test
 other routes and will execute the 1st action.
@@ -85,6 +86,10 @@ Below, few examples of how to capture different payloads
 It is posible to use a function test to capture any text that starts with `bye`
 ```javascript
 {text: (t) => t.startsWith('bye'), action: "bye"}
+```
+You can move to a new action if a condition over the user input is met
+```javascript
+{input: (i) => i.type === "text" && i.intent === "greetings", action: "greet"}
 ```
 Below, we see how to captures different intents (enable the Dialogflow integration)
 ```javascript
